@@ -51,17 +51,19 @@ export default function DashboardLayout({
   };
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-slate-100 overflow-hidden">
-      <Sidebar onReportSelect={handleReportSelect} />
+    <div className="flex h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-slate-100 overflow-hidden flex-col">
+      <Topbar onLogout={handleLogout} />
 
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <Topbar onLogout={handleLogout} />
+      <div className="flex flex-1 overflow-hidden">
+        <Sidebar onReportSelect={handleReportSelect} />
 
-        <main className="flex-1 overflow-auto p-6 md:p-8">
-          {children || (
-            <GrafanaEmbed report={selectedReport} reportId={reportId} />
-          )}
-        </main>
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <main className="flex-1 overflow-auto">
+            {children || (
+              <GrafanaEmbed report={selectedReport} reportId={reportId} />
+            )}
+          </main>
+        </div>
       </div>
     </div>
   );
@@ -171,27 +173,10 @@ function GrafanaEmbed({ report, reportId }: GrafanaEmbedProps) {
 
   return (
     <div className="h-full w-full animate-fade-in">
-      {/* Report Header */}
-      <div className="mb-6">
-        <div className="flex items-center justify-between mb-2">
-          <h2 className="text-3xl font-bold text-gray-900">{report.name}</h2>
-          <div className="flex items-center space-x-2 px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span>Live</span>
-          </div>
-        </div>
-        {report.description && (
-          <p className="text-gray-600 flex items-center space-x-2">
-            <TrendingUp className="w-4 h-4 text-primary-500" />
-            <span>{report.description}</span>
-          </p>
-        )}
-      </div>
-
       {/* Grafana Embed Container */}
       <div
-        className="bg-white rounded-2xl shadow-soft border border-gray-200/50 overflow-hidden"
-        style={{ height: "calc(100% - 120px)" }}
+        className="overflow-hidden"
+        style={{ height: "100%" }}
       >
         <div className="h-full relative">
           <iframe

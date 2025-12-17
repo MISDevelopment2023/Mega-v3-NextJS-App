@@ -3,27 +3,29 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
-    @apply bg-gray-50 text-gray-900 antialiased;
+    @apply bg-slate-50 text-slate-900;
   }
 
   * {
-    @apply border-gray-200;
+    @apply border-slate-200;
+  }
+
+  /* Selection styling */
+  ::selection {
+    @apply bg-primary-500/20 text-primary-900;
   }
 }
 
 @layer components {
-  .sidebar-item {
-    @apply flex items-center px-4 py-3 text-gray-700 hover:bg-primary-50 hover:text-primary-700 rounded-lg transition-colors duration-200 cursor-pointer;
-  }
-  
-  .sidebar-item.active {
-    @apply bg-primary-100 text-primary-900 font-medium;
-  }
-
-  /* Custom scrollbar */
+  /* Custom scrollbar - Modern thin style */
   ::-webkit-scrollbar {
-    @apply w-2 h-2;
+    @apply w-1.5 h-1.5;
   }
 
   ::-webkit-scrollbar-track {
@@ -31,26 +33,168 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 rounded-full;
+    @apply bg-slate-300/60 rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-400;
+    @apply bg-slate-400/80;
   }
 
   /* Firefox scrollbar */
   * {
     scrollbar-width: thin;
-    scrollbar-color: rgb(209 213 219) transparent;
+    scrollbar-color: rgba(148, 163, 184, 0.6) transparent;
+  }
+
+  /* Focus ring styling */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:ring-offset-2 focus:ring-offset-white;
+  }
+
+  /* Glass effect */
+  .glass {
+    @apply bg-white/80 backdrop-blur-xl border border-white/20;
+  }
+
+  /* Subtle gradient background */
+  .gradient-bg {
+    background: 
+      radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.03) 0%, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.03) 0%, transparent 50%),
+      #fafafa;
+  }
+
+  /* Card hover effect */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:shadow-slate-200/50 hover:-translate-y-0.5;
+  }
+
+  /* Button base styles */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 active:scale-95;
+  }
+
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/30 hover:from-primary-600 hover:to-primary-700;
+  }
+
+  .btn-secondary {
+    @apply btn bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900;
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900;
   }
 }
 
 @layer utilities {
+  /* Animations */
   .animate-fade-in {
-    animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.4s ease-out;
   }
 
   .animate-slide-in {
-    animation: slideIn 0.3s ease-out;
+    animation: slideIn 0.4s ease-out;
   }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out;
+  }
+
+  /* Stagger animation delay utilities */
+  .stagger-1 { animation-delay: 50ms; }
+  .stagger-2 { animation-delay: 100ms; }
+  .stagger-3 { animation-delay: 150ms; }
+  .stagger-4 { animation-delay: 200ms; }
+  .stagger-5 { animation-delay: 250ms; }
+  .stagger-6 { animation-delay: 300ms; }
+
+  /* Text gradient */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-600 via-primary-500 to-cyan-500 bg-clip-text text-transparent;
+  }
+
+  /* Shadow utilities */
+  .shadow-soft {
+    box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.02),
+      0 4px 8px rgba(0, 0, 0, 0.02),
+      0 8px 16px rgba(0, 0, 0, 0.02);
+  }
+
+  .shadow-glow-primary {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Pulse animation for status indicators */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
 }

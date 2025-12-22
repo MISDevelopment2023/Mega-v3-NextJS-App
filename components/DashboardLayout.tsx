@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 import { Report } from "@/types/report";
@@ -23,6 +24,7 @@ export default function DashboardLayout({
   children,
   defaultReportId,
 }: DashboardLayoutProps) {
+  const router = useRouter();
   const [selectedReport, setSelectedReport] = useState<Report | null>(null);
   const [reportId, setReportId] = useState<string | null>(
     defaultReportId || null
@@ -65,11 +67,8 @@ export default function DashboardLayout({
     setSelectedReport(report);
     setReportId(report.id);
 
-    if (typeof window !== "undefined") {
-      const url = new URL(window.location.href);
-      url.searchParams.set("reportId", report.id);
-      window.history.pushState({}, "", url);
-    }
+    // Use Next.js router for proper navigation and state updates
+    router.push(`/?reportId=${report.id}`, { scroll: false });
   };
 
   const handleLogout = () => {

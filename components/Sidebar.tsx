@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { reports, categories, getReportsByCategory } from "@/lib/reports";
 import { Report, ReportCategory, CategoryConfig } from "@/types/report";
@@ -91,29 +91,40 @@ export default function Sidebar({
 }: SidebarProps) {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [selectedReportId, setSelectedReportId] = useState<string | null>(null);
   const [expandedCategories, setExpandedCategories] = useState<ReportCategory[]>(["standard"]);
   const [currentReportId, setCurrentReportId] = useState<string | null>(null);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
+  // Get reportId from URL search params - this automatically updates when URL changes
+  const reportIdFromUrl = searchParams.get("reportId");
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const reportId = params.get("reportId");
-      setCurrentReportId(reportId);
-      
-      // Auto-expand the category containing the current report
-      if (reportId) {
-        const report = reports.find(r => r.id === reportId);
-        if (report && !expandedCategories.includes(report.category)) {
-          setExpandedCategories(prev => [...prev, report.category]);
-        }
+    // Update current report ID from URL
+    setCurrentReportId(reportIdFromUrl);
+    // Clear selectedReportId when URL changes to ensure only URL-based selection is used
+    setSelectedReportId(null);
+    
+    // Auto-expand the category containing the current report
+    if (reportIdFromUrl) {
+      const report = reports.find(r => r.id === reportIdFromUrl);
+      if (report) {
+        setExpandedCategories(prev => {
+          if (!prev.includes(report.category)) {
+            return [...prev, report.category];
+          }
+          return prev;
+        });
       }
     }
-  }, [pathname]);
+  }, [reportIdFromUrl]);
 
   const handleReportClick = (report: Report) => {
+    // Update immediately for instant feedback
+    setCurrentReportId(report.id);
     setSelectedReportId(report.id);
+    
     if (onReportSelect) {
       onReportSelect(report);
     } else {
@@ -194,6 +205,7 @@ export default function Sidebar({
                 fill
                 className="object-contain"
                 priority
+                unoptimized
               />
             </div>
             
@@ -251,8 +263,9 @@ export default function Sidebar({
               const CategoryIcon = getCategoryIcon(category.icon);
               const isExpanded = expandedCategories.includes(category.id) && !isCollapsed;
               const categoryReports = getReportsByCategory(category.id);
+              // Only use currentReportId from URL to ensure each tab/window shows correct selection
               const hasActiveReport = categoryReports.some(
-                r => r.id === selectedReportId || r.id === currentReportId
+                r => r.id === currentReportId
               );
 
               return (
@@ -310,7 +323,8 @@ export default function Sidebar({
                     `}>
                       <div className="pl-4 pr-1 py-1 space-y-0.5">
                         {categoryReports.map((report, reportIndex) => {
-                          const isActive = selectedReportId === report.id || currentReportId === report.id;
+                          // Only use currentReportId from URL to ensure each tab/window shows correct selection
+                          const isActive = currentReportId === report.id;
                           const ReportIcon = getIcon(report.icon);
 
                           return (

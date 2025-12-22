@@ -16,6 +16,22 @@
     @apply border-slate-200 dark:border-slate-700;
   }
 
+  /* Ensure images maintain transparency */
+  img {
+    background: transparent !important;
+  }
+
+  /* Next.js Image component wrapper - ensure no background */
+  span[style*="position: relative"],
+  span[style*="position:relative"] {
+    background: transparent !important;
+  }
+
+  span[style*="position: relative"] img,
+  span[style*="position:relative"] img {
+    background: transparent !important;
+  }
+
   /* Selection styling */
   ::selection {
     @apply bg-primary-500/20 dark:bg-primary-400/30 text-primary-900 dark:text-primary-100;

@@ -39,7 +39,7 @@ import {
   X,
   Menu,
   PanelLeftClose,
-  PanelLeftOpen,
+  PanelLeftOpen
 } from "lucide-react";
 
 // Icon mapping
@@ -70,7 +70,7 @@ const iconMap: Record<string, LucideIcon> = {
   Clock,
   Film,
   Archive,
-  User,
+  User
 };
 
 interface SidebarProps {

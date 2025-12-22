@@ -16,21 +16,35 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     // Check localStorage for saved theme preference
     const savedTheme = localStorage.getItem("theme") as Theme | null;
+    let initialTheme: Theme = "light";
+
     if (savedTheme) {
-      setTheme(savedTheme);
+      initialTheme = savedTheme;
     } else {
       // Check system preference
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      setTheme(prefersDark ? "dark" : "light");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      initialTheme = prefersDark ? "dark" : "light";
     }
+
+    // Apply theme immediately before setting state
+    const root = document.documentElement;
+    if (initialTheme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+
+    setTheme(initialTheme);
+    setMounted(true);
   }, []);
 
   useEffect(() => {
     if (!mounted) return;
-    
+
     // Apply theme to document
     const root = document.documentElement;
     if (theme === "dark") {
@@ -38,13 +52,25 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     } else {
       root.classList.remove("dark");
     }
-    
+
     // Save to localStorage
     localStorage.setItem("theme", theme);
   }, [theme, mounted]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    setTheme((prev) => {
+      const newTheme = prev === "light" ? "dark" : "light";
+      // Apply theme immediately to avoid delay
+      const root = document.documentElement;
+      if (newTheme === "dark") {
+        root.classList.add("dark");
+      } else {
+        root.classList.remove("dark");
+      }
+      // Save to localStorage immediately
+      localStorage.setItem("theme", newTheme);
+      return newTheme;
+    });
   };
 
   // Prevent flash of wrong theme
@@ -66,4 +92,3 @@ export function useTheme() {
   }
   return context;
 }
-

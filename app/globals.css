@@ -9,16 +9,16 @@
   }
 
   body {
-    @apply bg-slate-50 text-slate-900;
+    @apply bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100;
   }
 
   * {
-    @apply border-slate-200;
+    @apply border-slate-200 dark:border-slate-700;
   }
 
   /* Selection styling */
   ::selection {
-    @apply bg-primary-500/20 text-primary-900;
+    @apply bg-primary-500/20 dark:bg-primary-400/30 text-primary-900 dark:text-primary-100;
   }
 }
 
@@ -33,11 +33,11 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-300/60 rounded-full;
+    @apply bg-slate-300/60 dark:bg-slate-600/60 rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-400/80;
+    @apply bg-slate-400/80 dark:bg-slate-500/80;
   }
 
   /* Firefox scrollbar */
@@ -46,22 +46,33 @@
     scrollbar-color: rgba(148, 163, 184, 0.6) transparent;
   }
 
+  .dark * {
+    scrollbar-color: rgba(71, 85, 105, 0.6) transparent;
+  }
+
   /* Focus ring styling */
   .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:ring-offset-2 focus:ring-offset-white;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/30 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-900;
   }
 
   /* Glass effect */
   .glass {
-    @apply bg-white/80 backdrop-blur-xl border border-white/20;
+    @apply bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/20;
   }
 
   /* Subtle gradient background */
   .gradient-bg {
-    background: 
-      radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+    background: radial-gradient(
+        at 0% 0%,
+        rgba(59, 130, 246, 0.03) 0%,
+        transparent 50%
+      ),
       radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.03) 0%, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.03) 0%, transparent 50%),
+      radial-gradient(
+        at 100% 100%,
+        rgba(139, 92, 246, 0.03) 0%,
+        transparent 50%
+      ),
       #fafafa;
   }
 
@@ -107,12 +118,24 @@
   }
 
   /* Stagger animation delay utilities */
-  .stagger-1 { animation-delay: 50ms; }
-  .stagger-2 { animation-delay: 100ms; }
-  .stagger-3 { animation-delay: 150ms; }
-  .stagger-4 { animation-delay: 200ms; }
-  .stagger-5 { animation-delay: 250ms; }
-  .stagger-6 { animation-delay: 300ms; }
+  .stagger-1 {
+    animation-delay: 50ms;
+  }
+  .stagger-2 {
+    animation-delay: 100ms;
+  }
+  .stagger-3 {
+    animation-delay: 150ms;
+  }
+  .stagger-4 {
+    animation-delay: 200ms;
+  }
+  .stagger-5 {
+    animation-delay: 250ms;
+  }
+  .stagger-6 {
+    animation-delay: 300ms;
+  }
 
   /* Text gradient */
   .text-gradient {
@@ -121,9 +144,7 @@
 
   /* Shadow utilities */
   .shadow-soft {
-    box-shadow: 
-      0 2px 4px rgba(0, 0, 0, 0.02),
-      0 4px 8px rgba(0, 0, 0, 0.02),
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02), 0 4px 8px rgba(0, 0, 0, 0.02),
       0 8px 16px rgba(0, 0, 0, 0.02);
   }
 
@@ -187,7 +208,8 @@
 
 /* Pulse animation for status indicators */
 @keyframes pulse-subtle {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {

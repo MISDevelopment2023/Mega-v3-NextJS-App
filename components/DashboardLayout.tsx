@@ -95,6 +95,7 @@ export default function DashboardLayout({
         <Topbar 
           onLogout={handleLogout} 
           onMenuClick={() => setIsSidebarOpen(true)}
+          companyName={selectedReport?.name || "Select a report"}
         />
 
         {/* Main Content */}
@@ -233,26 +234,8 @@ function GrafanaEmbed({ report, reportId }: GrafanaEmbedProps) {
 
   return (
     <div className="h-full w-full animate-fade-in">
-      {/* Report Header */}
-      <div className="px-6 py-4 bg-white border-b border-slate-200">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-lg font-bold text-slate-900">{report.name}</h2>
-            {report.description && (
-              <p className="text-sm text-slate-500">{report.description}</p>
-            )}
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="px-2.5 py-1 text-xs font-medium text-emerald-700 bg-emerald-100 rounded-full flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-              Live
-            </span>
-          </div>
-        </div>
-      </div>
-
       {/* Grafana Embed Container */}
-      <div className="h-[calc(100%-73px)] relative">
+      <div className="h-full relative">
         <iframe
           src={report.grafanaUrl}
           className="w-full h-full border-0"

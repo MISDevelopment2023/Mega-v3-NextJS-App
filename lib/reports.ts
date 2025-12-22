@@ -89,6 +89,15 @@ export const reports: Report[] = [
 
   // ============ STANDARD ============
   {
+    id: "live-tracking-report",
+    name: "Live Tracking Report",
+    category: "standard",
+    grafanaUrl:
+      "http://10.10.0.122:8080/d/live-tracking/live-tracking-dashboard?orgId=1&from=2025-11-22T09:13:37.191Z&to=2025-12-22T09:13:37.191Z&timezone=browser&var-client_id=Lipton&var-vehicle_filter=All&var-status_filter=Total&var-selected_ffid=MFN-20230704143252&refresh=30s&var-selected_vehicle=&kiosk=true",
+    description: "Real-time vehicle location tracking",
+    icon: "MapPin",
+  },
+  {
     id: "trip-report",
     name: "Trip Report",
     category: "standard",
@@ -101,7 +110,8 @@ export const reports: Report[] = [
     id: "daily-mileage-report",
     name: "Daily Mileage Report",
     category: "standard",
-    grafanaUrl: "http://10.10.0.122:8080/d/daily-mileage-dashboard/daily-mileage-report?orgId=1&from=now-90d&to=now&timezone=browser&var-vehicle=FSD-7890&refresh=1m&kiosk=true",
+    grafanaUrl:
+      "http://10.10.0.122:8080/d/daily-mileage-dashboard/daily-mileage-report?orgId=1&from=now-90d&to=now&timezone=browser&var-vehicle=FSD-7890&refresh=1m&kiosk=true",
     description: "Daily distance traveled by vehicles",
     icon: "TrendingUp",
   },
@@ -109,7 +119,8 @@ export const reports: Report[] = [
     id: "mileage-report",
     name: "Mileage Report",
     category: "standard",
-    grafanaUrl: "http://10.10.0.122:8080/d/monthly-mileage-dashboard/monthly-mileage-report?orgId=1&from=now-30d&to=now-1d&timezone=browser&var-vehicle=$__all&refresh=30m&kiosk=true",
+    grafanaUrl:
+      "http://10.10.0.122:8080/d/monthly-mileage-dashboard/monthly-mileage-report?orgId=1&from=now-30d&to=now-1d&timezone=browser&var-vehicle=$__all&refresh=30m&kiosk=true",
     description: "Distance traveled by vehicles over a period of time",
     icon: "BarChart3",
   },
@@ -117,7 +128,8 @@ export const reports: Report[] = [
     id: "movement-report",
     name: "Movement Report",
     category: "standard",
-    grafanaUrl: "http://10.10.0.122:8080/d/movement-report-dashboard/movement-report?orgId=1&from=now-30d&to=now&timezone=browser&var-vehicle=KHI-1234&refresh=15m&kiosk=true",
+    grafanaUrl:
+      "http://10.10.0.122:8080/d/movement-report-dashboard/movement-report?orgId=1&from=now-30d&to=now&timezone=browser&var-vehicle=KHI-1234&refresh=15m&kiosk=true",
     description: "Vehicle movement and idle time analysis",
     icon: "Activity",
   },
@@ -234,7 +246,7 @@ export const reports: Report[] = [
   //   description: "Driver behavior analysis and scoring",
   //   icon: "User",
   // },
-    {
+  {
     id: "origin-destination-report",
     name: "Origin To Destination Report",
     category: "others",
@@ -243,7 +255,6 @@ export const reports: Report[] = [
     description: "Track trips between designated locations",
     icon: "Navigation",
   },
-
 ];
 
 /**
@@ -270,6 +281,8 @@ export function getReportsByCategory(category: ReportCategory): Report[] {
 /**
  * Get category configuration
  */
-export function getCategoryConfig(categoryId: ReportCategory): CategoryConfig | undefined {
+export function getCategoryConfig(
+  categoryId: ReportCategory
+): CategoryConfig | undefined {
   return categories.find((cat) => cat.id === categoryId);
 }

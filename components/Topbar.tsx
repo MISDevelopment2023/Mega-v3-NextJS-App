@@ -1,19 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { 
-  LogOut, 
-  Bell, 
-  User, 
-  Search, 
-  Menu, 
+import {
+  LogOut,
+  Bell,
+  User,
+  Search,
+  Menu,
   Settings,
   ChevronDown,
   HelpCircle,
   Moon,
   Sun,
-  RefreshCw
+  RefreshCw,
 } from "lucide-react";
 
 interface TopbarProps {
@@ -22,7 +23,11 @@ interface TopbarProps {
   companyName?: string;
 }
 
-export default function Topbar({ onLogout, onMenuClick, companyName = "UNI.OPERATION" }: TopbarProps) {
+export default function Topbar({
+  onLogout,
+  onMenuClick,
+  companyName = "UNI.OPERATION",
+}: TopbarProps) {
   const router = useRouter();
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -51,32 +56,14 @@ export default function Topbar({ onLogout, onMenuClick, companyName = "UNI.OPERA
 
         {/* Logo & Brand */}
         <div className="flex items-center gap-3">
-          <div className="relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 to-cyan-500 rounded-xl blur-sm opacity-30" />
-            <div className="relative w-10 h-10 bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-lg">
-              <svg
-                className="w-5 h-5 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
-                />
-              </svg>
-            </div>
-          </div>
-          <div className="hidden sm:block">
-            <h1 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-1">
-              <span className="bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent">MEGA</span>
-              <span className="text-slate-800">TECH</span>
-            </h1>
-            <div className="flex items-center gap-1.5">
-              <span className="text-[10px] text-slate-400 uppercase tracking-widest font-medium">Tracking & Telematics</span>
-            </div>
+          <div className="relative w-[180px] h-10">
+            <Image
+              src="/megatech-logo.png"
+              alt="Megatech Trackers (Pvt) Ltd."
+              fill
+              className="object-contain"
+              priority
+            />
           </div>
         </div>
 
@@ -86,17 +73,21 @@ export default function Topbar({ onLogout, onMenuClick, companyName = "UNI.OPERA
         {/* Company Badge */}
         <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg border border-slate-200/80">
           <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-sm font-semibold text-slate-700 tracking-tight">{companyName}</span>
+          <span className="text-sm font-semibold text-slate-700 tracking-tight">
+            {companyName}
+          </span>
         </div>
       </div>
 
       {/* Right Section */}
       <div className="flex items-center gap-2">
         {/* Search Bar - Desktop */}
-        <div className={`
+        <div
+          className={`
           hidden md:flex items-center relative transition-all duration-300
-          ${isSearchFocused ? 'w-80' : 'w-64'}
-        `}>
+          ${isSearchFocused ? "w-80" : "w-64"}
+        `}
+        >
           <Search className="absolute left-3.5 w-4 h-4 text-slate-400" />
           <input
             type="text"
@@ -179,25 +170,33 @@ export default function Topbar({ onLogout, onMenuClick, companyName = "UNI.OPERA
               U
             </div>
             <div className="hidden sm:block text-left">
-              <p className="text-sm font-semibold text-slate-700 leading-tight">User</p>
-              <p className="text-[10px] text-slate-400 leading-tight">Administrator</p>
+              <p className="text-sm font-semibold text-slate-700 leading-tight">
+                User
+              </p>
+              <p className="text-[10px] text-slate-400 leading-tight">
+                Administrator
+              </p>
             </div>
-            <ChevronDown className={`
+            <ChevronDown
+              className={`
               hidden sm:block w-4 h-4 text-slate-400 transition-transform duration-200
-              ${isUserMenuOpen ? 'rotate-180' : ''}
-            `} />
+              ${isUserMenuOpen ? "rotate-180" : ""}
+            `}
+            />
           </button>
 
           {/* Dropdown Menu */}
           {isUserMenuOpen && (
             <>
-              <div 
-                className="fixed inset-0 z-40" 
+              <div
+                className="fixed inset-0 z-40"
                 onClick={() => setIsUserMenuOpen(false)}
               />
               <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl border border-slate-200 shadow-xl shadow-slate-200/50 z-50 overflow-hidden animate-fade-in">
                 <div className="p-3 border-b border-slate-100 bg-slate-50/50">
-                  <p className="text-sm font-semibold text-slate-900">Fleet Manager</p>
+                  <p className="text-sm font-semibold text-slate-900">
+                    Fleet Manager
+                  </p>
                   <p className="text-xs text-slate-500">admin@megatech.com</p>
                 </div>
                 <div className="p-1.5">

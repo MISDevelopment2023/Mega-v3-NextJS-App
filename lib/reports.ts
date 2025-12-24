@@ -62,30 +62,30 @@ export const categories: CategoryConfig[] = [
  */
 export const reports: Report[] = [
   // ============ VIOLATIONS ============
-  // {
-  //   id: "overspeed-report",
-  //   name: "Overspeed Report",
-  //   category: "violations",
-  //   grafanaUrl: "",
-  //   description: "Track vehicle speed violations",
-  //   icon: "Gauge",
-  // },
-  // {
-  //   id: "harsh-driving-report",
-  //   name: "Harsh Driving Report",
-  //   category: "violations",
-  //   grafanaUrl: "",
-  //   description: "Monitor harsh acceleration and braking events",
-  //   icon: "AlertOctagon",
-  // },
-  // {
-  //   id: "geofence-violation-report",
-  //   name: "Geofence Violation Report",
-  //   category: "violations",
-  //   grafanaUrl: "",
-  //   description: "Track geofence entry/exit violations",
-  //   icon: "MapPinOff",
-  // },
+  {
+    id: "seatbelt-speed-violations-report",
+    name: "Violations Report",
+    category: "violations",
+    grafanaUrl: "http://10.10.0.122:8080/d/seatbelt-violations-dashboard/seatbelt-safety-violations-report?orgId=1&from=now-30d&to=now-1d&timezone=browser&var-vehicle=$__all&refresh=2h&kiosk=true",
+    description: "Track seatbelt and speed violations",
+    icon: "Gauge",
+  },
+  {
+    id: "yearly-ai-violations-report",
+    name: "Yearly Violations Report",
+    category: "violations",
+    grafanaUrl: "http://10.10.0.122:8080/d/yearly-ai-violations-dashboard/yearly-ai-violations-report?orgId=1&from=now-1y&to=now&timezone=browser&var-year=2024&refresh=1d&kiosk=true",
+    description: "Yearly view of violations detected by AI cameras",
+    icon: "AlertTriangle",
+  },
+  {
+    id: "speed-violation-report",
+    name: "Speed Violation Report",
+    category: "violations",
+    grafanaUrl: "http://10.10.0.122:8080/d/speed-violations-dashboard/speed-violations-report?orgId=1&from=2025-11-10T11:04:41.170Z&to=2025-11-16T11:04:41.170Z&timezone=browser&var-vehicle=$__all&var-region=$__all&refresh=2h",
+    description: "Track geofence entry/exit violations",
+    icon: "Gauge",
+  },
 
   // ============ STANDARD ============
   {
@@ -178,14 +178,14 @@ export const reports: Report[] = [
     description: "Temperature limit alerts and violations",
     icon: "ThermometerSun",
   },
-  // {
-  //   id: "temperature-hourly-report",
-  //   name: "Temperature Hourly Report",
-  //   category: "temperature",
-  //   grafanaUrl: "",
-  //   description: "Hourly temperature readings",
-  //   icon: "Clock",
-  // },
+  {
+    id: "temperature-hourly-report",
+    name: "Temperature Hourly Report Vertical",
+    category: "temperature",
+    grafanaUrl: "http://10.10.0.122:8080/d/temperature-hourly-dashboard/temperature-hourly-report?orgId=1&from=2025-11-29T19:00:00.000Z&to=2025-12-02T18:59:59.000Z&timezone=browser&var-vehicle=FSD-7890-Temperature&refresh=30m&kiosk=true",
+    description: "Hourly temperature readings",
+    icon: "Clock",
+  },
   // {
   //   id: "temperature-dashboard",
   //   name: "Temperature Dashboard",

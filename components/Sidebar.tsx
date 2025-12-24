@@ -40,7 +40,7 @@ import {
   X,
   Menu,
   PanelLeftClose,
-  PanelLeftOpen
+  PanelLeftOpen,
 } from "lucide-react";
 
 // Icon mapping
@@ -53,7 +53,6 @@ const iconMap: Record<string, LucideIcon> = {
   FileText,
   Settings,
   Truck,
-  AlertTriangle,
   LayoutDashboard,
   Fuel,
   Thermometer,
@@ -71,7 +70,8 @@ const iconMap: Record<string, LucideIcon> = {
   Clock,
   Film,
   Archive,
-  User
+  User,
+  AlertTriangle
 };
 
 interface SidebarProps {

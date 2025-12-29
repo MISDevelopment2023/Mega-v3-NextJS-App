@@ -263,7 +263,8 @@ export const reports: Report[] = [
     id: "event-videos",
     name: "Event Videos",
     category: "video",
-    grafanaUrl: "http://10.10.0.122:8080/d/mdvr-event-videos/event-videos?orgId=1&from=now-30d&to=now&timezone=browser&var-event_type=$__all&var-vehicle_no=$__all&refresh=30s&kiosk=true",
+    grafanaUrl:
+      "http://10.10.0.122:8080/d/mdvr-event-videos/event-videos?orgId=1&from=now-30d&to=now&timezone=browser&var-event_type=$__all&var-vehicle_no=$__all&refresh=30s&kiosk=true",
     description: "Video recordings of specific events",
     icon: "Film",
   },
@@ -290,7 +291,8 @@ export const reports: Report[] = [
     id: "last-update-report",
     name: "Last Update Report",
     category: "others",
-    grafanaUrl: "http://10.10.0.122:8080/d/vehicle-last-update-dashboard/vehicle-last-update-report?orgId=1&from=now-90d&to=now&timezone=browser&var-vehicle=$__all&refresh=30s&kiosk=true",
+    grafanaUrl:
+      "http://10.10.0.122:8080/d/vehicle-last-update-dashboard/vehicle-last-update-report?orgId=1&from=now-90d&to=now&timezone=browser&var-vehicle=$__all&refresh=30s&kiosk=true",
     description: "Vehicle alerts",
     icon: "Settings",
   },
@@ -325,7 +327,8 @@ export const reports: Report[] = [
     id: "trip-sheet-uplload-report",
     name: "Trip Sheet Upload Report",
     category: "cherat",
-    grafanaUrl: "http://10.10.0.122:8080/d/trip-sheet-uploads-dashboard/trip-sheet-uploads?orgId=1&from=now-30d&to=now&timezone=browser&var-user_id=MFN-20230704143527&refresh=10s0&kiosk=true",
+    grafanaUrl:
+      "http://10.10.0.122:8080/d/trip-sheet-uploads-dashboard/trip-sheet-uploads?orgId=1&from=now-30d&to=now&timezone=browser&var-user_id=MFN-20230704143527&refresh=10s0&kiosk=true",
     description: "Monitor trip sheet uploads by users",
     icon: "Upload",
   },
@@ -333,7 +336,8 @@ export const reports: Report[] = [
     id: "trip-sheet-details-report",
     name: "Trip Sheet Details Report",
     category: "cherat",
-    grafanaUrl: "http://10.10.0.122:8080/d/trip-sheet-details-dashboard/trip-sheet-details?orgId=1&from=now-30d&to=now&timezone=browser&var-sheet_id=SHEET-MFN-20230704143527-20251127-340761&refresh=10s0&kiosk=true",
+    grafanaUrl:
+      "http://10.10.0.122:8080/d/trip-sheet-details-dashboard/trip-sheet-details?orgId=1&from=now-30d&to=now&timezone=browser&var-sheet_id=SHEET-MFN-20230704143527-20251127-340761&refresh=10s0&kiosk=true",
     description: "Detailed trip sheet information and analysis",
     icon: "FileText",
   },
@@ -341,7 +345,8 @@ export const reports: Report[] = [
     id: "trip-sheet-results-report",
     name: "Trip Sheet Results Report",
     category: "cherat",
-    grafanaUrl: "http://10.10.0.122:8080/d/trip-sheet-results-dashboard/trip-sheet-results?orgId=1&from=now-90d&to=now&timezone=browser&var-sheet_id=SHEET-20251111&var-uploaded_on=&refresh=1m0&kiosk=true",
+    grafanaUrl:
+      "http://10.10.0.122:8080/d/trip-sheet-results-dashboard/trip-sheet-results?orgId=1&from=now-90d&to=now&timezone=browser&var-sheet_id=SHEET-20251111&var-uploaded_on=&refresh=1m0&kiosk=true",
     description: "Results and summaries of trip sheets",
     icon: "BarChart3",
   },
@@ -349,17 +354,38 @@ export const reports: Report[] = [
     id: "trip-search-engine-report",
     name: "Trip Search Engine Report",
     category: "cherat",
-    grafanaUrl: "http://10.10.0.122:8080/d/trip-route-maps-dashboard/trip-route-maps?orgId=1&from=now-7d&to=now&timezone=browser&var-vehicle=YZA-890&var-trip_date=2025-12-09&var-selected_trip=TRIP-YZA-890-20251211-837&refresh=60s&kiosk=true",
+    grafanaUrl:
+      "http://10.10.0.122:8080/d/trip-route-maps-dashboard/trip-route-maps?orgId=1&from=now-7d&to=now&timezone=browser&var-vehicle=YZA-890&var-trip_date=2025-12-09&var-selected_trip=TRIP-YZA-890-20251211-837&refresh=60s&kiosk=true",
     description: "Search and visualize trip routes",
     icon: "MapPin",
-  }
-
+  },
 ];
 
 /**
  * Get a report by ID
  */
 export function getReportById(id: string): Report | undefined {
+  // Handle Main Home reports
+  if (id === "main-home") {
+    return {
+      id: "main-home",
+      name: "Main Home",
+      category: "others",
+      grafanaUrl:
+        "http://10.10.0.122:8080/d/mainhome-fleet-status/mainhome-fleet-status-dashboard?orgId=1&from=now-90d&to=now&timezone=browser&refresh=30s&kiosk=true",
+      icon: "Home",
+    };
+  }
+  if (id === "main-home-2") {
+    return {
+      id: "main-home-2",
+      name: "Main Home 2",
+      category: "others",
+      grafanaUrl:
+        "http://10.10.0.122:8080/d/mainhomenew-comprehensive/mainhomenew-comprehensive-dashboard?orgId=1&from=now-7d&to=now&timezone=browser&refresh=30s&kiosk=true",
+      icon: "Home",
+    };
+  }
   return reports.find((report) => report.id === id);
 }
 

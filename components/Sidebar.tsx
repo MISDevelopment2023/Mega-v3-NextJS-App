@@ -147,6 +147,31 @@ export default function Sidebar({
     }
   };
 
+  const handleMainHomeClick = (name: string, url: string, id: string) => {
+    // Create a report-like object for embedding
+    const mainHomeReport: Report = {
+      id: id,
+      name: name,
+      category: "others", // Use a default category for type compatibility
+      grafanaUrl: url,
+      icon: "Home",
+    };
+
+    // Update immediately for instant feedback
+    setCurrentReportId(id);
+    setSelectedReportId(id);
+
+    if (onReportSelect) {
+      onReportSelect(mainHomeReport);
+    } else {
+      router.push(`/?reportId=${id}`);
+    }
+    // Close sidebar on mobile after selection
+    if (window.innerWidth < 1024 && onClose) {
+      onClose();
+    }
+  };
+
   const toggleCategory = (categoryId: ReportCategory) => {
     // When collapsed, expand sidebar first
     if (isCollapsed && onToggleCollapse) {
@@ -302,22 +327,34 @@ export default function Sidebar({
           <div className="space-y-1">
             {/* Main Home Link */}
             <Tooltip label="Main Home">
-              <a
-                href="http://10.10.0.122:8080/d/mainhome-fleet-status/mainhome-fleet-status-dashboard?orgId=1&from=now-90d&to=now&timezone=browser&refresh=30s&kiosk=true"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() =>
+                  handleMainHomeClick(
+                    "Main Home",
+                    "http://10.10.0.122:8080/d/mainhome-fleet-status/mainhome-fleet-status-dashboard?orgId=1&from=now-90d&to=now&timezone=browser&refresh=30s&kiosk=true",
+                    "main-home"
+                  )
+                }
                 className={`
                   w-full flex items-center rounded-xl
                   transition-all duration-200 group
                   ${isCollapsed ? "justify-center p-2" : "gap-3 px-3 py-2.5"}
-                  text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100
+                  ${
+                    currentReportId === "main-home"
+                      ? "bg-primary-500 dark:bg-primary-600 text-white shadow-lg shadow-primary-500/25"
+                      : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100"
+                  }
                 `}
               >
                 <div
                   className={`
                     w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0
                     transition-colors duration-200
-                    bg-primary-100 dark:bg-primary-800 text-primary-600 dark:text-primary-300 group-hover:opacity-80
+                    ${
+                      currentReportId === "main-home"
+                        ? "bg-white/20 text-white"
+                        : "bg-primary-100 dark:bg-primary-800 text-primary-600 dark:text-primary-300 group-hover:opacity-80"
+                    }
                   `}
                 >
                   <Home className="w-4 h-4" />
@@ -327,27 +364,42 @@ export default function Sidebar({
                     Main Home
                   </span>
                 )}
-              </a>
+                {currentReportId === "main-home" && (
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/80 animate-pulse" />
+                )}
+              </button>
             </Tooltip>
 
             {/* Main Home 2 Link */}
             <Tooltip label="Main Home 2">
-              <a
-                href="http://10.10.0.122:8080/d/mainhomenew-comprehensive/mainhomenew-comprehensive-dashboard?orgId=1&from=now-7d&to=now&timezone=browser&refresh=30s&kiosk=true"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() =>
+                  handleMainHomeClick(
+                    "Main Home 2",
+                    "http://10.10.0.122:8080/d/mainhomenew-comprehensive/mainhomenew-comprehensive-dashboard?orgId=1&from=now-7d&to=now&timezone=browser&refresh=30s&kiosk=true",
+                    "main-home-2"
+                  )
+                }
                 className={`
                   w-full flex items-center rounded-xl
                   transition-all duration-200 group
                   ${isCollapsed ? "justify-center p-2" : "gap-3 px-3 py-2.5"}
-                  text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100
+                  ${
+                    currentReportId === "main-home-2"
+                      ? "bg-primary-500 dark:bg-primary-600 text-white shadow-lg shadow-primary-500/25"
+                      : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100"
+                  }
                 `}
               >
                 <div
                   className={`
                     w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0
                     transition-colors duration-200
-                    bg-primary-100 dark:bg-primary-800 text-primary-600 dark:text-primary-300 group-hover:opacity-80
+                    ${
+                      currentReportId === "main-home-2"
+                        ? "bg-white/20 text-white"
+                        : "bg-primary-100 dark:bg-primary-800 text-primary-600 dark:text-primary-300 group-hover:opacity-80"
+                    }
                   `}
                 >
                   <Home className="w-4 h-4" />
@@ -357,7 +409,10 @@ export default function Sidebar({
                     Main Home 2
                   </span>
                 )}
-              </a>
+                {currentReportId === "main-home-2" && (
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/80 animate-pulse" />
+                )}
+              </button>
             </Tooltip>
 
             {categories.map((category, categoryIndex) => {

@@ -12,6 +12,7 @@ import {
   Wrench,
   BarChart3,
   FileText,
+  Upload,
   Settings,
   Truck,
   LucideIcon,
@@ -43,6 +44,7 @@ import {
   PanelLeftOpen,
   FileWarning,
   Moon,
+  Compass
 } from "lucide-react";
 
 // Icon mapping
@@ -54,6 +56,7 @@ const iconMap: Record<string, LucideIcon> = {
   BarChart3,
   FileText,
   Settings,
+  Compass,
   Truck,
   LayoutDashboard,
   Fuel,
@@ -76,6 +79,7 @@ const iconMap: Record<string, LucideIcon> = {
   AlertTriangle,
   FileWarning,
   Moon,
+  Upload
 };
 
 interface SidebarProps {

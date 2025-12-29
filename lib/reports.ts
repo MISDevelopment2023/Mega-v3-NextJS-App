@@ -46,6 +46,13 @@ export const categories: CategoryConfig[] = [
     color: "text-slate-600",
     bgColor: "bg-slate-50",
   },
+  {
+    id: "cherat",
+    label: "Cherat",
+    icon: "Truck",
+    color: "text-green-600",
+    bgColor: "bg-green-50",
+  },
 ];
 
 /**
@@ -103,7 +110,7 @@ export const reports: Report[] = [
     name: "Speed Violation Report",
     category: "violations",
     grafanaUrl:
-      "http://10.10.0.122:8080/d/speed-violations-dashboard/speed-violations-report?orgId=1&from=2025-11-10T11:04:41.170Z&to=2025-11-16T11:04:41.170Z&timezone=browser&var-vehicle=$__all&var-region=$__all&refresh=2h",
+      "http://10.10.0.122:8080/d/speed-violations-dashboard/speed-violations-report?orgId=1&from=2025-11-10T11:04:41.170Z&to=2025-11-16T11:04:41.170Z&timezone=browser&var-vehicle=$__all&var-region=$__all&refresh=2h&kiosk=true",
     description: "Track geofence entry/exit violations",
     icon: "Gauge",
   },
@@ -121,11 +128,19 @@ export const reports: Report[] = [
     name: "Blackpoints Report",
     category: "violations",
     grafanaUrl:
-      "http://10.10.0.122:8080/d/blackpoints-dashboard/blackpoints-report?orgId=1&from=now-90d&to=now&timezone=browser&var-vehicle=MUL-3456&refresh=1d&kiosk=true",
+      "http://10.10.0.122:8080/d/black-points-report-dashboard/black-points-report?orgId=1&from=now-30d&to=now&timezone=browser&var-report_type=$__all&var-corporate=$__all&var-vehicle=$__all&refresh=2h&kiosk=true",
     description: "Track blackpoints",
     icon: "AlertOctagon",
   },
-
+  {
+    id: "seatbelt-coneected-monitoring-report",
+    name: "Seatbelt Connected Monitoring Report",
+    category: "violations",
+    grafanaUrl:
+      "http://10.10.0.122:8080/d/seatbelt-monitoring-dashboard/seat-belt-connected-monitoring-report?orgId=1&from=now-30d&to=now-1d&timezone=browser&var-vehicle=$__all&refresh=1m&kiosk=true",
+    description: "Monitor seatbelt connectivity status",
+    icon: "Seatbelt",
+  },
   // ============ STANDARD ============
   {
     id: "live-tracking-report",
@@ -244,14 +259,14 @@ export const reports: Report[] = [
   //   description: "Real-time video feeds from vehicles",
   //   icon: "Video",
   // },
-  // {
-  //   id: "event-videos",
-  //   name: "Event Videos",
-  //   category: "video",
-  //   grafanaUrl: "",
-  //   description: "Video recordings of specific events",
-  //   icon: "Film",
-  // },
+  {
+    id: "event-videos",
+    name: "Event Videos",
+    category: "video",
+    grafanaUrl: "http://10.10.0.122:8080/d/mdvr-event-videos/event-videos?orgId=1&from=now-30d&to=now&timezone=browser&var-event_type=$__all&var-vehicle_no=$__all&refresh=30s&kiosk=true",
+    description: "Video recordings of specific events",
+    icon: "Film",
+  },
   // {
   //   id: "historical-videos",
   //   name: "Historical Videos",
@@ -271,14 +286,23 @@ export const reports: Report[] = [
     description: "Track market visits",
     icon: "MapPin",
   },
-  // {
-  //   id: "maintenance-schedule",
-  //   name: "Maintenance Schedule",
-  //   category: "others",
-  //   grafanaUrl: "",
-  //   description: "Vehicle maintenance alerts and scheduling",
-  //   icon: "Wrench",
-  // },
+  {
+    id: "last-update-report",
+    name: "Last Update Report",
+    category: "others",
+    grafanaUrl: "http://10.10.0.122:8080/d/vehicle-last-update-dashboard/vehicle-last-update-report?orgId=1&from=now-90d&to=now&timezone=browser&var-vehicle=$__all&refresh=30s&kiosk=true",
+    description: "Vehicle alerts",
+    icon: "Settings",
+  },
+  {
+    id: "last-position-report",
+    name: "Last Position Report",
+    category: "others",
+    grafanaUrl:
+      "http://10.10.0.122:8080/d/last-position-report-dashboard/last-position-report?orgId=1&from=now-24h&to=now&timezone=browser&var-vehicle=$__all&refresh=1m&kiosk=true",
+    description: "Most recent vehicle locations",
+    icon: "Compass",
+  },
   // {
   //   id: "driver-performance",
   //   name: "Driver Performance",
@@ -296,6 +320,40 @@ export const reports: Report[] = [
     description: "Track trips between designated locations",
     icon: "Navigation",
   },
+  // =========== Trip ===========
+  {
+    id: "trip-sheet-uplload-report",
+    name: "Trip Sheet Upload Report",
+    category: "cherat",
+    grafanaUrl: "http://10.10.0.122:8080/d/trip-sheet-uploads-dashboard/trip-sheet-uploads?orgId=1&from=now-30d&to=now&timezone=browser&var-user_id=MFN-20230704143527&refresh=10s0&kiosk=true",
+    description: "Monitor trip sheet uploads by users",
+    icon: "Upload",
+  },
+  {
+    id: "trip-sheet-details-report",
+    name: "Trip Sheet Details Report",
+    category: "cherat",
+    grafanaUrl: "http://10.10.0.122:8080/d/trip-sheet-details-dashboard/trip-sheet-details?orgId=1&from=now-30d&to=now&timezone=browser&var-sheet_id=SHEET-MFN-20230704143527-20251127-340761&refresh=10s0&kiosk=true",
+    description: "Detailed trip sheet information and analysis",
+    icon: "FileText",
+  },
+  {
+    id: "trip-sheet-results-report",
+    name: "Trip Sheet Results Report",
+    category: "cherat",
+    grafanaUrl: "http://10.10.0.122:8080/d/trip-sheet-results-dashboard/trip-sheet-results?orgId=1&from=now-90d&to=now&timezone=browser&var-sheet_id=SHEET-20251111&var-uploaded_on=&refresh=1m0&kiosk=true",
+    description: "Results and summaries of trip sheets",
+    icon: "BarChart3",
+  },
+  {
+    id: "trip-search-engine-report",
+    name: "Trip Search Engine Report",
+    category: "cherat",
+    grafanaUrl: "http://10.10.0.122:8080/d/trip-route-maps-dashboard/trip-route-maps?orgId=1&from=now-7d&to=now&timezone=browser&var-vehicle=YZA-890&var-trip_date=2025-12-09&var-selected_trip=TRIP-YZA-890-20251211-837&refresh=60s&kiosk=true",
+    description: "Search and visualize trip routes",
+    icon: "MapPin",
+  }
+
 ];
 
 /**

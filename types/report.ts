@@ -4,6 +4,8 @@ export type ReportCategory =
   | "fuel"
   | "temperature"
   | "video"
+  | "trip"
+  | "cherat"
   | "others";
 
 export interface Report {

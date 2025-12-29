@@ -44,7 +44,8 @@ import {
   PanelLeftOpen,
   FileWarning,
   Moon,
-  Compass
+  Compass,
+  Home,
 } from "lucide-react";
 
 // Icon mapping
@@ -79,7 +80,7 @@ const iconMap: Record<string, LucideIcon> = {
   AlertTriangle,
   FileWarning,
   Moon,
-  Upload
+  Upload,
 };
 
 interface SidebarProps {
@@ -299,6 +300,66 @@ export default function Sidebar({
           }`}
         >
           <div className="space-y-1">
+            {/* Main Home Link */}
+            <Tooltip label="Main Home">
+              <a
+                href="http://10.10.0.122:8080/d/mainhome-fleet-status/mainhome-fleet-status-dashboard?orgId=1&from=now-90d&to=now&timezone=browser&refresh=30s&kiosk=true"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`
+                  w-full flex items-center rounded-xl
+                  transition-all duration-200 group
+                  ${isCollapsed ? "justify-center p-2" : "gap-3 px-3 py-2.5"}
+                  text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100
+                `}
+              >
+                <div
+                  className={`
+                    w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0
+                    transition-colors duration-200
+                    bg-primary-100 dark:bg-primary-800 text-primary-600 dark:text-primary-300 group-hover:opacity-80
+                  `}
+                >
+                  <Home className="w-4 h-4" />
+                </div>
+                {!isCollapsed && (
+                  <span className="flex-1 text-left text-sm font-semibold tracking-tight">
+                    Main Home
+                  </span>
+                )}
+              </a>
+            </Tooltip>
+
+            {/* Main Home 2 Link */}
+            <Tooltip label="Main Home 2">
+              <a
+                href="http://10.10.0.122:8080/d/mainhomenew-comprehensive/mainhomenew-comprehensive-dashboard?orgId=1&from=now-7d&to=now&timezone=browser&refresh=30s&kiosk=true"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`
+                  w-full flex items-center rounded-xl
+                  transition-all duration-200 group
+                  ${isCollapsed ? "justify-center p-2" : "gap-3 px-3 py-2.5"}
+                  text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100
+                `}
+              >
+                <div
+                  className={`
+                    w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0
+                    transition-colors duration-200
+                    bg-primary-100 dark:bg-primary-800 text-primary-600 dark:text-primary-300 group-hover:opacity-80
+                  `}
+                >
+                  <Home className="w-4 h-4" />
+                </div>
+                {!isCollapsed && (
+                  <span className="flex-1 text-left text-sm font-semibold tracking-tight">
+                    Main Home 2
+                  </span>
+                )}
+              </a>
+            </Tooltip>
+
             {categories.map((category, categoryIndex) => {
               const CategoryIcon = getCategoryIcon(category.icon);
               const isExpanded =

@@ -170,6 +170,15 @@ export const reports: Report[] = [
     icon: "TrendingUp",
   },
   {
+    id: "hourly-mileage-report",
+    name: "Hourly Mileage Report",
+    category: "standard",
+    grafanaUrl:
+      "http://10.10.0.122:8080/d/hourly-mileage-dashboard/hourly-mileage-report?orgId=1&from=2025-11-23T19:00:00.000Z&to=2025-11-29T11:06:52.000Z&timezone=browser&var-vehicle=$__all&refresh=1m&kiosk=true",
+    description: "Hourly distance traveled by vehicles",
+    icon: "Clock",
+  },
+  {
     id: "mileage-report",
     name: "Mileage Report",
     category: "standard",
@@ -187,41 +196,41 @@ export const reports: Report[] = [
     description: "Vehicle movement and idle time analysis",
     icon: "Activity",
   },
-  // {
-  //   id: "stoppage-report",
-  //   name: "Stoppage Report",
-  //   category: "standard",
-  //   grafanaUrl: "",
-  //   description: "Vehicle stoppage locations and durations",
-  //   icon: "PauseCircle",
-  // },
-
   // ============ FUEL ============
-  // {
-  //   id: "fuel-consumption-report",
-  //   name: "Fuel Consumption Report",
-  //   category: "fuel",
-  //   grafanaUrl: "",
-  //   description: "Monitor fuel usage across fleet",
-  //   icon: "Droplet",
-  // },
-  // {
-  //   id: "fuel-filling-report",
-  //   name: "Fuel Filling Report",
-  //   category: "fuel",
-  //   grafanaUrl: "",
-  //   description: "Track fuel filling events",
-  //   icon: "Plus",
-  // },
-  // {
-  //   id: "fuel-drainage-report",
-  //   name: "Fuel Drainage Report",
-  //   category: "fuel",
-  //   grafanaUrl: "",
-  //   description: "Detect potential fuel theft",
-  //   icon: "AlertTriangle",
-  // },
-
+  {
+    id: "fuel-dashboard-report",
+    name: "Fuel Dashboard",
+    category: "fuel",
+    grafanaUrl:
+    "http://10.10.0.122:8080/d/fuel-dashboard-main-dashboard/fuel-dashboard-main?orgId=1&from=now-5m&to=now&timezone=browser&var-vehicle=$__all&refresh=2h&kiosk=true",
+    description: "Comprehensive fuel monitoring dashboard",
+    icon: "Fuel",
+  },
+  {
+    id: "fuel-theft-report",
+    name: "Fuel Theft Report",
+    category: "fuel",
+    grafanaUrl:
+      "http://10.10.0.122:8080/d/fuel-theft-report-dashboard/fuel-theft-report?orgId=1&from=2025-11-09T19:00:00.000Z&to=2025-12-10T18:59:59.000Z&timezone=browser&var-vehicle=$__all&refresh=1d&kiosk=true",
+    description: "Detect potential fuel theft incidents",
+    icon: "AlertCircle",
+  },
+  {
+    id: "fuel-consumption-report",
+    name: "Fuel Consumption Report",
+    category: "fuel",
+    grafanaUrl: "http://10.10.0.122:8080/d/fuel-consumption-report-dashboard/fuel-consumption-report?orgId=1&from=2025-11-09T19:00:00.000Z&to=2025-12-10T18:59:59.000Z&timezone=browser&var-vehicle=$__all&refresh=1d&kiosk=true",
+    description: "Monitor fuel usage across fleet",
+    icon: "Droplet",
+  },
+  {
+    id: "fuel-filling-report",
+    name: "Fuel Filling Report",
+    category: "fuel",
+    grafanaUrl: "http://10.10.0.122:8080/d/fuel-filling-report-dashboard/fuel-filling-report?orgId=1&from=2025-11-09T19:00:00.000Z&to=2025-12-10T18:59:59.000Z&timezone=browser&var-vehicle=$__all&refresh=1d&kiosk=true",
+    description: "Track fuel filling events",
+    icon: "Plus",
+  },
   // ============ TEMPERATURE ============
   {
     id: "temperature-threshold-report",
@@ -241,14 +250,14 @@ export const reports: Report[] = [
     description: "Hourly temperature readings",
     icon: "Clock",
   },
-  // {
-  //   id: "temperature-dashboard",
-  //   name: "Temperature Dashboard",
-  //   category: "temperature",
-  //   grafanaUrl: "",
-  //   description: "Real-time temperature monitoring",
-  //   icon: "Gauge",
-  // },
+  {
+    id: "temperature-dashboard",
+    name: "Temperature Dashboard",
+    category: "temperature",
+    grafanaUrl: "http://10.10.0.122:8080/d/temperature-dashboard-coldchainprimary/temperature-dashboard-coldchainprimary?orgId=1&from=now-24h&to=now&timezone=browser&var-vehicle=$__all&refresh=15m&var-status_filter=all%20:%20all%0Aloaded%20:%20loaded%0Aunloaded%20:%20unloaded%0Awithin%20:%20within%0Aoutside%20:%20outside%0AnotResponding%20:%20notResponding&kiosk=true",
+    description: "Real-time temperature monitoring",
+    icon: "Gauge",
+  },
 
   // ============ VIDEO ============
   // {
@@ -305,14 +314,23 @@ export const reports: Report[] = [
     description: "Most recent vehicle locations",
     icon: "Compass",
   },
-  // {
-  //   id: "driver-performance",
-  //   name: "Driver Performance",
-  //   category: "others",
-  //   grafanaUrl: "",
-  //   description: "Driver behavior analysis and scoring",
-  //   icon: "User",
-  // },
+  {
+    id: "driver-observation-report",
+    name: "Driving Observation Report",
+    category: "others",
+    grafanaUrl: "http://10.10.0.122:8080/d/driving-observation-dashboard/road-driving-assessment?orgId=1&from=now-30d&to=now&timezone=browser&refresh=1m&showCategory=Editable%20Data&var-driver_id=DRIVER-5678&kiosk=true",
+    description: "Driver behavior analysis and scoring",
+    icon: "User",
+  },
+  {
+    id: "driver-profile",
+    name: "Driver Profile Report",
+    category: "others",
+    grafanaUrl:
+      "http://10.10.0.122:8080/d/driver-profile/driver-profile?orgId=1&from=now-30d&to=now&timezone=browser&var-driver_id=DRV-001&refresh=30s&kiosk=true",
+    description: "Comprehensive driver profiles",
+    icon: "CircleUser",
+  },
   {
     id: "origin-destination-report",
     name: "Origin To Destination Report",
@@ -321,6 +339,24 @@ export const reports: Report[] = [
       "http://10.10.0.122:8080/d/fence-wise-trip-report-dashboard/origin-to-destination-report?orgId=1&from=2025-11-15T20:26:17.760Z&to=2025-12-15T20:26:17.760Z&timezone=browser&var-vehicle=JW-3219&refresh=30m&kiosk=true",
     description: "Track trips between designated locations",
     icon: "Navigation",
+  },
+  {
+    id: "idle-time-report",
+    name: "Idling Report",
+    category: "others",
+    grafanaUrl:
+      "http://10.10.0.122:8080/d/idle-report-dashboard/idle-report?orgId=1&from=2025-11-14T12:35:46.952Z&to=2025-12-14T12:35:46.952Z&timezone=browser&var-vehicle=FSD-7890&var-min_idle_minutes=0&refresh=1m&kiosk=true",
+    description: "Monitor vehicle idle durations",
+    icon: "Clock",
+  },
+  {
+    id: "not-responding-report",
+    name: "Not Responding Report",
+    category: "others",
+    grafanaUrl:
+      "http://10.10.0.122:8080/d/not-responding-report-dashboard/not-responding-report?orgId=1&from=2025-12-10T00:28:12.345Z&to=2025-12-12T13:00:44.016Z&timezone=browser&var-vehicle=$__all&var-min_hours=1&refresh=2h&kiosk=true",
+    description: "Vehicles not responding for extended periods",
+    icon: "CircleSlash2",
   },
   // =========== Trip ===========
   {

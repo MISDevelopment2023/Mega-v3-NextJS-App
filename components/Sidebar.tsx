@@ -46,6 +46,8 @@ import {
   Moon,
   Compass,
   Home,
+  CircleSlash2,
+  CircleUser
 } from "lucide-react";
 
 // Icon mapping
@@ -81,6 +83,8 @@ const iconMap: Record<string, LucideIcon> = {
   FileWarning,
   Moon,
   Upload,
+  CircleSlash2,
+  CircleUser
 };
 
 interface SidebarProps {
